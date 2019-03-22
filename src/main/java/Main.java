@@ -1,10 +1,13 @@
-import TwoThreeEight.TwoThreeEight;
+import Challenges.TwoThreeEight;
+import Utils.Handler;
 
 public class Main {
 
     public static void main(String[] args) {
-        TwoThreeEight twoThreeEight = new TwoThreeEight();
-        twoThreeEight.init();
+
+        Handler handler = new Handler();
+
+        handler.init();
     }
 
 }

@@ -1,23 +1,24 @@
-package TwoThreeEight;
+package Challenges;
 
-import Utils.Dictionary;
-import Utils.InputManager;
+import Utils.Handler;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import java.util.stream.Collectors;
 
 // https://www.reddit.com/r/dailyprogrammer/comments/3qjnil/20151028_challenge_238_intermediate_fallout/
 
-public class TwoThreeEight {
+public class TwoThreeEight implements Challenge {
 
-    Dictionary dictionary = new Dictionary();
-    InputManager input = new InputManager();
+    Handler handler;
+
     List<String> words;
+    List<String> guesses = new ArrayList<>();
+    List<Integer> wordMatches = new ArrayList<>();
 
-    public void init() {
-        dictionary.loadWordlist();
-        game();
+    public TwoThreeEight(Handler handler) {
+        this.handler = handler;
     }
 
     public void game() {
@@ -28,7 +29,7 @@ public class TwoThreeEight {
 
         while (guesses < 5 && !answer) {
             words.stream().forEach(System.out::println);
-            answer = checkWord(input.verifyString().toUpperCase(), correctWord);
+            answer = checkWord(handler.getInput().verifyString().toUpperCase(), correctWord);
             guesses++;
             System.out.println(" Guesses made: " + guesses + "\n");
         }
@@ -36,7 +37,6 @@ public class TwoThreeEight {
     }
 
     private boolean checkWord(String verifyString, String correctWord) {
-//        int contained = 0;
         int match = 0;
 
         if (verifyString.equals(correctWord)) {
@@ -44,11 +44,6 @@ public class TwoThreeEight {
             System.exit(0);
         }
 
-//        for (int i = 0; i < verifyString.length(); i++) {
-//            if(correctWord.contains(""+verifyString.charAt(i))) {
-//                contained++;
-//            }
-//        }
 
         for (int i = 0; i < verifyString.length(); i++) {
             if(correctWord.charAt(i) == verifyString.charAt(i)) {
@@ -57,6 +52,7 @@ public class TwoThreeEight {
         }
 
         System.out.println("\n Correct letters: " + match);
+        printPreviousGuesses(verifyString, match);
         return false;
     }
 
@@ -65,7 +61,7 @@ public class TwoThreeEight {
         int amountOfWords = 12;
 
         List<String> rightLength =
-        dictionary.getWordlist().stream().filter(string -> string.length() == length )
+        handler.getDictionary().getWordlist().stream().filter(string -> string.length() == length )
                 .collect(Collectors.toList());
 
         List<String> randomWords = new ArrayList<>();
@@ -74,5 +70,20 @@ public class TwoThreeEight {
             randomWords.add( rightLength.get( (int) (Math.random() * ((rightLength.size()) ))).toUpperCase());
         }
         return randomWords;
+    }
+
+    private void printPreviousGuesses(String newGuess, int matches) {
+        guesses.add(newGuess);
+        wordMatches.add(matches);
+
+        for (int i = 0; i < guesses.size(); i++) {
+            System.out.println(guesses.get(i) + ": " + wordMatches.get(i));
+        }
+    }
+
+    @Override
+    public void initialize() {
+        handler.getDictionary().loadWordlist();
+        game();
     }
 }

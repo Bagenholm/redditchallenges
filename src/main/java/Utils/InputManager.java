@@ -27,7 +27,7 @@ public class InputManager {
     /** Takes input and returns if it's a digit between 0 and the max value, through verifyInt(int, int, String).
      * Used to not get NullPointerException when accessing arraylists*/
     public int verifyInt(int min, int max) {
-        System.out.println("Please enter a digit. Leave blank to go back to main menu.");
+        System.out.println("Please enter a digit. Leave blank to go back.");
         return verifyIntFormat(min, max, takeInput());
     }
 
