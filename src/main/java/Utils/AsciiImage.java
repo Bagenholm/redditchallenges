@@ -1,7 +1,6 @@
 package Utils;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,7 +13,7 @@ public class AsciiImage {
 
     public BufferedImage makeImage() {
         try {
-            BufferedImage image = ImageIO.read(new File("src\\main\\resources\\diego.png")); //ImageIO.read(FileSelector.chooseImageFileLoad());
+            BufferedImage image = ImageIO.read(new File("src\\main\\resources\\diego.png"));
             return image;
         } catch (Exception e) {
             e.printStackTrace();
