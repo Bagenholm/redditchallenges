@@ -24,6 +24,11 @@ public class Handler {
         challenges.add(new TwoFourThree(this));
     }
 
+    public String asciiImage() {
+        AsciiImage image = new AsciiImage();
+        return image.newImage();
+    }
+
     public ArrayList<Challenge> getChallenges() {
         return challenges;
     }

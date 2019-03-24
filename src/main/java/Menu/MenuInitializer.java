@@ -14,6 +14,7 @@ public class MenuInitializer {
         Menu mainMenu = new Menu(handler);
 
         mainMenu.add("Reddit challenge 238, Fallout Hack Game", () -> handler.getChallenges().get(0).initialize());
+        mainMenu.add("Print image to ascii", () -> System.out.println(handler.asciiImage()));
         mainMenu.add("Quit", () -> System.exit(0));
 
         mainMenu.run();
