@@ -13,6 +13,7 @@ public class AsciiImage {
 
     public BufferedImage makeImage() {
         try {
+            //Change pathname to change image asciid.
             BufferedImage image = ImageIO.read(new File("src\\main\\resources\\diego.png"));
             return image;
         } catch (Exception e) {
